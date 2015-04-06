@@ -1,0 +1,32 @@
+{
+    "users": [
+        {
+            "email": "j.smith@gmail.com",
+            "f_book": "Harry Potter",
+            "f_movie": "Batman",
+            "f_food": "Banana",
+            "f_game": "Pokemon"
+        },
+        {
+            "email": "h.smith@gmail.com",
+            "f_book": "Moby Dick",
+            "f_movie": "5",
+            "f_food": "2",
+            "f_game": "3"
+        },
+        {
+            "email": "a.ward@gmail.com",
+            "f_book": "Twighlight",
+            "f_movie": "2",
+            "f_food": "1",
+            "f_game": "4"
+        },
+        {
+            "email": "h.anderson@gmail.com",
+            "f_book": "Harry Potter",
+            "f_movie": "4",
+            "f_food": "3",
+            "f_game": "2"
+        }
+    ]
+}

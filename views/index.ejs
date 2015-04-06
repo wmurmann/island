@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Desert Island</title>
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+	<div class="center_box">
+		<div id="query">
+			<h1>Desert Island Match</h1>
+			<p>Desert Islands can be lonely, select your favorite items from below and we'll find you a companion based on you preferences.</p>
+			<form action="#" method="post" id='favorites'>
+				<select class="form-control" id="books">
+				  <option>Choose a Book</option>
+				  <option>Harry Potter</option>
+				  <option>Moby Dick</option>
+				  <option>The Cat in the Hat</option>
+				  <option>The Great Gatsby</option>
+				  <option>Twilight</option>
+				</select>
+				<select class="form-control" id="movies">
+				  <option>Choose a Movie</option>
+				  <option>1</option>
+				  <option>2</option>
+				  <option>3</option>
+				  <option>4</option>
+				  <option>5</option>
+				</select>
+				<select class="form-control" id="food">
+				  <option>Choose a Food</option>
+				  <option>1</option>
+				  <option>2</option>
+				  <option>3</option>
+				  <option>4</option>
+				  <option>5</option>
+				</select>
+				<select class="form-control" id="games">
+				  <option>Choose a Game</option>
+				  <option>1</option>
+				  <option>2</option>
+				  <option>3</option>
+				  <option>4</option>
+				  <option>5</option>
+				</select>
+				<button type="submit" id="favorite_submit"class="btn btn-default">Submit</button>
+			</form>
+		</div>
+		<div id="result">
+			<h1>Your Desert Island Match is:</h1>
+			<p id='match'></p>
+			<form action="#" method="post" id='reset'>
+				<button id="reset_submit">Try Again</button>
+			</form>
+		</div>
+	</div>
+  <script src="jquery/dist/jquery.js"></script>
+  <script src="main.js"></script>
+  <script src="jquery-ui/jquery-ui.js"></script>
+  <script src="bootstrap/dist/js/bootstrap.js"></script>
+</body>
+
+</html>

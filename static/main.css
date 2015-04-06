@@ -1,0 +1,30 @@
+.center_box
+{
+	width:500px;
+	margin:10% auto;
+	padding: 10px 20px;
+}
+.center_box h1
+{
+	font-size: 2.2em;
+}
+.center_box select
+{
+	margin-bottom: 5px;
+}
+.center_box button
+{
+	margin: 0 auto;
+}
+#result
+{
+	display: none;
+}
+#query
+{
+	display: block;
+}
+.ui-menu .ui-menu-item
+{
+	text-transform:capitalize;
+}
