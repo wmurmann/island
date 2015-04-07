@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname,'static')));
 app.use(express.static(path.join(__dirname,'bower_components')));
 
-//render the 
+//determine which page to load, login or match
 app.get('/',function (req,res) {
 	//check if user is signed in, if they are redirect to the match screen, if not redirect to login screen
 	if(req.cookies.name != undefined)
@@ -29,6 +29,7 @@ app.get('/',function (req,res) {
 	}
 });
 
+//reder the login page
 app.get('/login',function (req,res) {
 	//check if user is signed in, if they are redirect to the match screen
 	if(req.cookies.name != undefined)
@@ -113,6 +114,7 @@ app.post('/updateFavorite',function (req,res){
 	console.log(users_json);
 });
 
+//return the saved users and their matches minus the current user
 app.post('/getMatches',function (req,res){
 	var cookie_name = req.cookies.name;
 	var users_minus_current_user = users_json;
@@ -131,6 +133,7 @@ app.listen(1337,function(){
 	console.log('ready on port 1337');
 });
 
+//list of preloaded users: will be appended to ass app runs
 var users_json = {
     "users": [
         {

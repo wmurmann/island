@@ -11,6 +11,8 @@ $( document ).ready(function() {
             $('.center_box').on('submit',function(e){
             	e.preventDefault();
             });
+
+            //The next for functinos call the functions for autocomplete
             $("#movie_suggest").on('keyup',function(e){
                 if(e.which <= 90 && e.which >= 48 || e.keyCode == 8)
                 {
@@ -40,9 +42,12 @@ $( document ).ready(function() {
                  }
             });
 
+            //submit form to get matches
             submit.on("click", function(event) {
                 getMatches(getFavorites(submit));
             });
+
+            //reset form
             reset.on("click", function(event) {
             	$('#favorites').find("input[type=text], textarea").val("");
             	$('#result').hide();
@@ -51,6 +56,9 @@ $( document ).ready(function() {
             });
 
         };
+
+        //retrieve the autocomplete information from norch(search engine/server)
+        //give autocomplete data to the jquery-ui widget
         var match_query = function(filter)
         {
         	var search = $('#'+filter+'_suggest').val();
@@ -91,6 +99,8 @@ $( document ).ready(function() {
 			  }
 			});
         };
+
+        //send the user's most current favorites to server to update
         var setFavorites = function(favorites)
        	{
 			var favs = {
@@ -108,6 +118,8 @@ $( document ).ready(function() {
 				}
 			});
        	};
+
+       	//get the favorites from the form
         var getFavorites = function()
         {
         	var books = $('#book_suggest').val();
@@ -118,6 +130,9 @@ $( document ).ready(function() {
         	setFavorites(favorites);
         	return [books,movies,food,games];
         };
+
+        //get the users' favorite's from the node server
+        //call the bestMatch funciton with the result from the server
         var getMatches = function(favorites)
         {
 			$.ajax({
@@ -129,6 +144,8 @@ $( document ).ready(function() {
 				}
 			});
         };
+
+        //determine the best match from all the users and display the best match
         var bestMatch = function(favorites,saved_favorites)
         //compare array of saved users favorites to the current users favorits
         {
