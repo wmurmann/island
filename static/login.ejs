@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Facebook API Test</title>
+<meta charset="UTF-8">
+  <script src="jquery/dist/jquery.js"></script>
+</head>
+<body>
+<script>
+  function statusChangeCallback(response) {
+
+    if (response.status === 'connected') {
+      returnData();
+    } 
+    else if (response.status === 'not_authorized') {
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } 
+    else {
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+  }
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '553335014769463',
+      cookie     : true,  // enable cookies to allow the server to access 
+                          // the session
+      xfbml      : true,  // parse social plugins on this page
+      version    : 'v2.2' // use version 2.2
+    });
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  };
+
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  function returnData() {
+    FB.api('/me', function(response) {
+      document.getElementById('username').innerHTML ='Name: ' + response.name;
+      document.getElementById('useremail').innerHTML =' Email: ' + response.email;
+    });
+  }
+  if ($("._4z_f .fwb").length) { console.log('hello');}
+
+</script>
+<style>
+  .fb_iframe_widget
+  {
+    display: block;
+    width: 160px;
+    margin: 0 auto;
+    margin-top: 50px;
+    position: relative;
+  }
+  ._4z_f .fwb
+  {
+    padding: 0px 0px;
+  }
+  .infoBox
+  {
+    width: 300px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .title
+  {
+    font-size: 2em;
+    text-align: center;
+    color: #404040;
+  }
+  .userInfo
+  {
+  margin: 0;
+  }
+  .userInfo li
+  {
+    list-style-type: none;
+    background-color: #f5f5f5;
+  }
+</style>
+<h1>Welcome to Deserted Island Match</h1>
+<h2>Please sign in with facebook</h2>
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+Sign In
+</fb:login-button>
+<div class='infoBox'>
+  <h1 class="title">Your Info</h1>
+  <ul class="userInfo">
+  <li id="username"></li>
+  <li id="useremail"></li>
+</ul>
+</div>
+
+
+</body>
+</html>

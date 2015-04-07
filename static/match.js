@@ -2,10 +2,12 @@ $( document ).ready(function() {
 	var match = (function (){
         
 		var submit = $('#favorite_submit');
+		var logout = $('#logout');
 		var reset = $('#reset_submit');
 		var movie_titles = [];
         var init = function()
         {
+
             $('.center_box').on('submit',function(e){
             	e.preventDefault();
             });
@@ -62,7 +64,6 @@ $( document ).ready(function() {
 			  url: url,
 			  success: function (response)
 			  {
-			  	console.log(response);
 			  	//get rid of underscore to display nicely 
 				for (var i = response.length - 1; i >= 0; i--) {
 					response[i] = response[i].replace(/_/g, ' ');
@@ -90,27 +91,42 @@ $( document ).ready(function() {
 			  }
 			});
         };
+        var setFavorites = function(favorites)
+       	{
+			var favs = {
+				book: favorites[0],
+				movie: favorites[1],
+				food: favorites[2],
+				game: favorites[3]
+			};
+			$.ajax({
+				type:"POST",
+				data: favs,
+				url: "http://localhost:1337/updateFavorite",
+				success: function (response)
+				{
+				}
+			});
+       	};
         var getFavorites = function()
         {
         	var books = $('#book_suggest').val();
         	var movies = $('#movie_suggest').val();
         	var food = $('#food_suggest').val();
         	var games = $('#game_suggest').val();
+        	var favorites =[books,movies,food,games];
+        	setFavorites(favorites);
         	return [books,movies,food,games];
-        }
+        };
         var getMatches = function(favorites)
         {
 			$.ajax({
-			  dataType: "json",
-			  url: 'users.txt',
-			  success: function (users)
-			  {
-				bestMatch(favorites,users);
-			  },
-			  error: function (response)
-			  {
-			  	//handle error
-			  }
+				type:"POST",
+				url: "http://localhost:1337/getMatches",
+				success: function (users)
+				{
+					bestMatch(favorites,users);
+				}
 			});
         };
         var bestMatch = function(favorites,saved_favorites)
@@ -152,14 +168,37 @@ $( document ).ready(function() {
         		{
         			matchCount = currentCount;
         			bestMatch = [];
+        			bestMatch.push(saved_favorites['users'][i]["name"]);
         			bestMatch.push(saved_favorites['users'][i]["email"]);
-        			commonalities.push(incommon.join(","));
+        			commonalities = incommon;
         		}
         	}
             if (bestMatch.length > 0)
             {
+            	// make common items array look nice with commas and 'and'
+            	var commonalities_to_string = "";
+            	if(commonalities.length > 2)
+            	{
+            		for(var count = 0; count < commonalities.length; count++ )
+            		{
+            			console.log(commonalities[count]);
+            			if(count == commonalities.length - 1)
+            			{
+            				commonalities_to_string += ("and " + commonalities[count]);
+            			}
+            			else
+            			{
+            				commonalities_to_string += ( commonalities[count] + ", ");
+            			}
+            		}
+            	}
+            	else
+            	{
+            		commonalities_to_string = commonalities;
+            	}
+
             	$("#query").hide();
-            	$("#match").text(bestMatch[0] + " and you both like " + commonalities[1]);
+            	$("#match").text(bestMatch[0] + " and you both like " + commonalities_to_string + ". Contact your match by their email: " + bestMatch[1]+".");
             	$("#result").show();
             }
             else
@@ -168,7 +207,7 @@ $( document ).ready(function() {
             	$("#match").text("No match found, its going to be a lonely island.");
             	$("#result").show();
             }
-        }
+        };
         return {
             init: init
         };

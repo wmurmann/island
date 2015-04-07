@@ -1,7 +1,7 @@
 {
     "users": [
         {
-            "name": "John Smith"
+            "name": "John Smith",
             "email": "j.smith@gmail.com",
             "f_book": "Harry Potter",
             "f_movie": "Batman",
@@ -9,7 +9,7 @@
             "f_game": "Pokemon"
         },
         {
-            "name": "Harry Smith"
+            "name": "Harry Smith",
             "email": "h.smith@gmail.com",
             "f_book": "Moby Dick",
             "f_movie": "apple",

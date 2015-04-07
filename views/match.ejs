@@ -15,22 +15,23 @@
 			<h1>Desert Island Match</h1>
 			<p>Desert Islands can be lonely, select your favorite items from below and we'll find you a companion based on you preferences.</p>
 			<form action="#" method="post" id='favorites'>
-				<label for="movie">Moive:</label>
+				<label class="favorite_label" for="movie">Moive:</label>
 				<input type="text" id="movie_suggest" name="movie" placeholder="Enter your favorite movie"/>
-				<label for="food">Food:</label>
+				<label class="favorite_label" for="food">Food:</label>
 				<input type="text" id="food_suggest" name="food" placeholder="Enter your favorite food"/>
-				<label for="book">Book:</label>
+				<label class="favorite_label" for="book">Book:</label>
 				<input type="text" id="book_suggest" name="book" placeholder="Enter your favorite book"/>
-				<label for="game">Game:</label>
+				<label class="favorite_label" for="game">Game:</label>
 				<input type="text" id="game_suggest" name="game" placeholder="Enter your favorite game"/>
 				<button type="submit" id="favorite_submit"class="btn btn-default">Find A Friend</button>
+				<button type="submit" id="logout" class="btn btn-default">Logout</button>
 			</form>
 		</div>
 		<div id="result">
 			<h1>Your Desert Island Match is:</h1>
 			<p id='match'></p>
 			<form action="#" method="post" id='reset'>
-				<button id="reset_submit">Try Again</button>
+				<button id="reset_submit" class="btn btn-default">Try Again</button>
 			</form>
 		</div>
 	</div>
@@ -38,6 +39,36 @@
   <script src="jquery-ui/jquery-ui.js"></script>
   <script src="bootstrap/dist/js/bootstrap.js"></script>
   <script src="match.js"></script>
+  <script type="text/javascript">
+	  window.fbAsyncInit = function() {
+	    FB.init({
+	      appId      : '553335014769463',
+	      cookie     : true,  // enable cookies to allow the server to access 
+	                          // the session
+	      xfbml      : true,  // parse social plugins on this page
+	      version    : 'v2.2' // use version 2.2
+	    });
+	  };
+	  (function(d, s, id) {
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id)) return;
+	    js = d.createElement(s); js.id = id;
+	    js.src = "//connect.facebook.net/en_US/sdk.js";
+	    fjs.parentNode.insertBefore(js, fjs);
+	  }(document, 'script', 'facebook-jssdk'));
+	$("#logout").on('click', function (){
+		FB.logout();
+		$.ajax({
+			type:"POST",
+			url: "http://localhost:1337/unsetCookie",
+			success: function (users)
+			{
+				window.location.href = "http://localhost:1337/match";
+			}
+		});
+	})
+
+</script>
 </body>
 
 </html>

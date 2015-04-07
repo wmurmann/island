@@ -1,8 +1,16 @@
+body
+{
+	background-image: url('islandBkgrd.jpg');
+}
 .center_box
 {
-	width:500px;
-	margin:10% auto;
-	padding: 10px 20px;
+	width: 500px;
+	margin: 10% auto;
+	padding: 20px;
+	border-radius: 5px;
+	border: 1px solid #D1CDCD;
+	background-color: #F2F2F2;
+	background-color: rgba(245,245,245,0.75);
 }
 .center_box h1
 {
@@ -27,4 +35,25 @@
 .ui-menu .ui-menu-item
 {
 	text-transform:capitalize;
+}
+.center
+{
+	text-align: center;
+}
+.favorite_label
+{
+	display: inline-block;
+	width: 43px;
+}
+#favorites > input
+{
+	margin-top: 10px;
+}
+#favorites > button
+{
+	margin-top: 10px;
+}
+#favorite_submit 
+{
+	margin-right: 10px;
 }
